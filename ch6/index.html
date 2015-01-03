@@ -2,7 +2,7 @@
 <html lang="en">
     <head>
         <meta charset="utf-8">
-        <title>D3: Drawing divs with data</title>
+        <title>D3: Drawing Divs</title>
         <script type="text/javascript" src="http://d3js.org/d3.v3.min.js"></script>
         <style type="text/css">
 
@@ -22,7 +22,11 @@
                 .data(dataset)
                 .enter()
                 .append("div")
-                .attr("class", "bar");
+                .attr("class", "bar")
+                .style("height", function(d) {
+                    var barHeight = d * 5;
+                    return barHeight + "px";
+                });
         </script>
     </body>
 </html>
