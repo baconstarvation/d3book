@@ -13,9 +13,9 @@
             .data(dataset)
             .enter()
             .append("p")
-            .text("New paragraph!");
-
-            console.log(d3.selectAll("p"));
+            .text(function(d) {
+                return "I can count up to " + d;
+            });
         </script>
     </body>
 </html>
