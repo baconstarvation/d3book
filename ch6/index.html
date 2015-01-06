@@ -5,13 +5,7 @@
         <title>D3: Ch 6</title>
         <script type="text/javascript" src="http://d3js.org/d3.v3.min.js"></script>
         <style type="text/css">
-
-            div.bar {
-                display: inline-block;
-                width: 20px;
-                height: 75px;
-                background-color: teal;
-            }
+            /* No style rules here yet */
         </style>
     </head>
     <body>
@@ -38,7 +32,7 @@
                     return i * (w / dataset.length);
                 })
                 .attr("y", function(d) {
-                    return h - d; //Height minus data value
+                    return h - (d * 4); //Height minus data value
                 })
                 .attr("width", w / dataset.length - barPadding)
                 .attr("height", function(d) {
