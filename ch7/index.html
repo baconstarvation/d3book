@@ -21,6 +21,16 @@
                             [410, 12], [475, 44], [25, 67], [85, 21], [220, 88]
                           ];
 
+            var xScale = d3.scale.linear()
+                .domain([0, d3.max(dataset, function(d) {
+                    return d[0]; })])
+                .range([0, w]);
+
+            var yScale = d3.scale.linear()
+                .domain([0, d3.max(dataset, function(d) {
+                    return d[1]; })])
+                .range([0, h]);
+
             // Create SVG element
             var svg = d3.select("body")
                         .append("svg")
@@ -40,6 +50,8 @@
                 .attr("r", function(d) {
                     return Math.sqrt(h - d[1]);
                 });
+
+
 
             svg.selectAll("text")
                 .data(dataset)
