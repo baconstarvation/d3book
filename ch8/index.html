@@ -23,7 +23,7 @@
             // Width and height
             var w = 500;
             var h = 300;
-            var padding = 20;
+            var padding = 30;
 
             var dataset = [
                             [5, 20], [480, 90], [250, 50], [100, 33], [330, 95],
@@ -47,7 +47,13 @@
 
             var xAxis = d3.svg.axis()
                 .scale(xScale)
-                .orient("bottom");
+                .orient("bottom")
+                .ticks(5);
+
+            var yAxis = d3.svg.axis()
+                .scale(yScale)
+                .orient("left")
+                .ticks(5);
 
             // Create SVG element
             var svg = d3.select("body")
@@ -90,6 +96,11 @@
                 .attr("class", "axis")
                 .attr("transform", "translate(0," + (h - padding) + ")")
                 .call(xAxis);
+
+            svg.append("g")
+                .attr("class", "axis")
+                .attr("transform", "translate(" + padding + ",0)")
+                .call(yAxis);
 
         </script>
     </body>
