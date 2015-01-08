@@ -5,7 +5,16 @@
         <title>D3: Ch 8</title>
         <script type="text/javascript" src="http://d3js.org/d3.v3.min.js"></script>
         <style type="text/css">
-            /* No style rules here yet */
+            .axis path,
+            .axis line {
+                fill: none;
+                stroke: black;
+                shape-rendering: crispEdges;
+            }
+            .axis text {
+                font-family: sans-serif;
+                font-size: 11px;
+            }
         </style>
     </head>
     <body>
@@ -78,6 +87,8 @@
                 .attr("fill", "red");
 
             svg.append("g")
+                .attr("class", "axis")
+                .attr("transform", "translate(0," + (h - padding) + ")")
                 .call(xAxis);
 
         </script>
