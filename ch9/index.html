@@ -79,7 +79,10 @@
                     svg.selectAll("rect")
                         .data(dataset)
                         .transition()
-                        .duration(5000)
+                        .delay(function(d, i) {
+                            return i * 100;
+                        })
+                        .duration(500)
                         .attr("y", function(d) {
                             return h - yScale(d);
                         })
@@ -94,7 +97,10 @@
                     svg.selectAll("text")
                         .data(dataset)
                         .transition()
-                        .duration(5000)
+                        .delay(function(d, i) {
+                            return i * 100;
+                        })
+                        .duration(500)
                         .text(function(d) {
                             return d;
                         })
