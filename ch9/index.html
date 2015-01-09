@@ -9,6 +9,7 @@
 		</style>
 	</head>
 	<body>
+            <p>Click on this text to update the chart with new data values (once).</p>
 		<script type="text/javascript">
 
 			//Width and height
@@ -67,6 +68,12 @@
 			   .attr("font-family", "sans-serif")
 			   .attr("font-size", "11px")
 			   .attr("fill", "white");
+
+            d3.select("p")
+                .on("click", function() {
+                    //Do something on click
+                    alert("Hey, don't click on that!");
+                });
 
 		</script>
 	</body>
