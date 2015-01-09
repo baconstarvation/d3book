@@ -76,11 +76,14 @@
 
                     // New values for dataset
                     var numValues = dataset.length;
+                    var maxValue = 100;
                     dataset = [];
                     for (var i = 0; i < numValues; i++) {
-                        var newNumber = Math.floor(Math.random() * 25);
+                        var newNumber = Math.floor(Math.random() * maxValue);
                         dataset.push(newNumber);
                     }
+
+                    yScale.domain([0, d3.max(dataset)]);
 
                     //Update all rects
                     svg.selectAll("rect")
