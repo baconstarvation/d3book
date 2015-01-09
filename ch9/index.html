@@ -71,8 +71,19 @@
 
             d3.select("p")
                 .on("click", function() {
-                    //Do something on click
-                    alert("Hey, don't click on that!");
+
+                    // New values for dataset
+                    dataset = [ 11, 12, 15, 20, 18, 17, 16, 18, 23, 25, 5, 10, 13, 19, 21, 25, 22, 18, 15, 13 ];
+
+                    //Update all rects
+                    svg.selectAll("rect")
+                        .data(dataset)
+                        .attr("y", function(d) {
+                            return h - yScale(d);
+                        })
+                        .attr("height", function(d) {
+                            return yScale(d);
+                        });
                 });
 
 		</script>
