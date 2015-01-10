@@ -47,6 +47,10 @@
                             .domain([0, d3.max(dataset, function(d) { return d.value; })])
                             .range([0, h]);
 			
+            var key = function(d) {
+                return d.key;
+            };
+
 			//Create SVG element
 			var svg = d3.select("body")
 						.append("svg")
@@ -55,7 +59,7 @@
 
             //Create bars
 			svg.selectAll("rect")
-			   .data(dataset)
+			   .data(dataset, key)
 			   .enter()
 			   .append("rect")
 			   .attr("x", function(d, i) {
@@ -74,7 +78,7 @@
 
             //Create labels
 			svg.selectAll("text")
-			   .data(dataset)
+			   .data(dataset, key)
 			   .enter()
 			   .append("text")            
 			   .text(function(d) {
@@ -109,7 +113,7 @@
 
                     //Select...
                     var bars = svg.selectAll("rect")            //Select all bars
-                        .data(dataset);                         //Re-bind data to existing bars, return the 'update' selection
+                        .data(dataset, key);                         //Re-bind data to existing bars, return the 'update' selection
                                                                 //'bars' is now the update selection
 
                     /* /Enter...
@@ -155,7 +159,7 @@
 
                     //Select: Labels
                     var labels = svg.selectAll("text")
-                        .data(dataset)
+                        .data(dataset, key)
 
                     /* //Enter.. Labels
                     labels.enter()
