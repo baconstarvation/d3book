@@ -119,7 +119,7 @@
 								.each("start", function() {
 									d3.select(this)
 										.attr("fill", "magenta")
-										.attr("r", 3);
+										.attr("r", 7);
 								})
 								.attr("cx", function(d) {
 										return xScale(d[0]);
@@ -129,6 +129,8 @@
 								})
 								.each("end", function() {
 										d3.select(this)
+											.transition()
+											.duration(1000)
 											.attr("fill", "black")
 											.attr("r", 2);
 								})
