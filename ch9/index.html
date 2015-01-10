@@ -189,7 +189,7 @@
                     labels.exit()
                         .transition()
                         .duration(500)
-                        .attr("x", w)
+                        .attr("x", -xScale.rangeBand())
                         .remove();
                 });
 
