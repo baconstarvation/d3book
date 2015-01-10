@@ -149,7 +149,7 @@
                     bars.exit()             //References the exit selection (a subset of the update selection)
                         .transition()       //Initiates a transition on the one element we're deleting
                         .duration(500)
-                        .attr("x", w)       //Move past the right edge of the SVG
+                        .attr("x", -xScale.rangeBand())       //Move past the right edge of the SVG
                         .remove();          //Deletes this element from the DOM once transition is complete
 
 
@@ -191,7 +191,6 @@
                         .duration(500)
                         .attr("x", w)
                         .remove();
-
                 });
 
 		</script>
