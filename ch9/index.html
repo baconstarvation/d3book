@@ -10,7 +10,7 @@
 	</head>
 	<body>
 
-        <p>Click on this text to add a new data value to the chart!</p>
+        <p>Click on this text to remove a data value from the chart!</p>
 
 		<script type="text/javascript">
 
@@ -77,10 +77,8 @@
             d3.select("p")
                 .on("click", function() {
 
-                    //Add one new value to the dataset
-                    var maxValue = 25;
-                    var newNumber = Math.floor(Math.random() * maxValue);   //New random integer (0-24)
-                    dataset.push(newNumber);                                //Add new number to array
+                    //Remove one value from dataset
+                    dataset.shift();
 
                     //Update scale domains
                     xScale.domain(d3.range(dataset.length));    //Recalibrate the x scale domain, given the new length of dataset
