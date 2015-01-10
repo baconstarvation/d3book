@@ -1,0 +1,24 @@
+<script type="text/javascript">
+
+
+
+
+
+            //Create bars
+			svg.selectAll("rect")
+			   .data(dataset)
+			   .enter()
+			   .append("rect")
+			   .attr("x", function(d, i) {
+			   		return xScale(i);
+			   })
+			   .attr("y", function(d) {
+			   		return h - yScale(d);
+			   })
+			   .attr("width", xScale.rangeBand())
+			   .attr("height", function(d) {
+			   		return yScale(d);
+			   })
+			   .attr("fill", function(d) {
+					return "rgb(0, 0, " + (d * 10) + ")";
+			   });
