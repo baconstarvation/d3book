@@ -10,7 +10,8 @@
 	</head>
 	<body>
 
-        <p>Click on this text to remove a data value from the chart!</p>
+        <p id="add">Add a new data value</p>
+        <p id="remove">Remove a data value</p>
 
 		<script type="text/javascript">
 
@@ -96,16 +97,27 @@
 			   .attr("fill", "white");
 
             //On click, update with new data
-            d3.select("p")
+            d3.selectAll("p")
                 .on("click", function() {
 
-                    //Remove one value from dataset
-                    dataset.shift();
-
-                    /* //Add one new value to dataset
-                    var maxValue = 25;
-                    var newNumber = Math.floor(Math.random() * maxValue);   //New random integer (0-24)
-                    dataset.push(newNumber);                                //Add new number to array */
+                    //See which p was clicked
+                    var paragraphID = d3.select(this).attr("id");
+                    
+                    //Decide what to do next
+                    if (paragraphID == "add") {
+                        //Add a data value
+                        var maxValue = 25;
+                        var newNumber = Math.floor(Math.random() * maxValue);
+                        var lastKeyValue = dataset[dataset.length - 1].key;
+                        console.log(lastKeyValue);
+                        dataset.push({
+                            key: lastKeyValue + 1,
+                            value: newNumber
+                        });
+                    } else {
+                        //Remove a value
+                        dataset.shift();    //Remove one value from dataset
+                    }
 
                     //Update scale domains
                     xScale.domain(d3.range(dataset.length));    //Recalibrate the x scale domain, given the new length of dataset
@@ -116,20 +128,20 @@
                         .data(dataset, key);                         //Re-bind data to existing bars, return the 'update' selection
                                                                 //'bars' is now the update selection
 
-                    /* /Enter...
+                    // Enter...
                     bars.enter()                                //References the enter selection (a subset of the update selection)
                         .append("rect")                         //Creates a new rect
                         .attr("x", w)                           //Sets the initial x position of the rect beyond the far right edge of the SVG
                         .attr("y", function(d) {                //Sets the y value, based on the updated yScale
-                            return h - yScale(d);
+                            return h - yScale(d.value);
                         })
                         .attr("width", xScale.rangeBand())      //Sets the width value, based on the updated xScale
                         .attr("height", function(d) {           //Sets the height value, based on the updated yScale
-                            return yScale(d);
+                            return yScale(d.value);
                         })
                         .attr("fill", function(d) {             //Sets the fill value
-                            return "rgb(0, 0, " + (d * 10) + ")";
-                        }); */
+                            return "rgb(0, 0, " + (d.value * 10) + ")";
+                        });
 
                     //Update...
                     bars.transition()                           //Initiate a transition on all elements in the update selection (all rects)
@@ -145,36 +157,30 @@
                             return yScale(d.value);
                         });
 
-                    //Exit…
-                    bars.exit()             //References the exit selection (a subset of the update selection)
-                        .transition()       //Initiates a transition on the one element we're deleting
+                    bars.exit()
+                        .transition()
                         .duration(500)
-                        .attr("x", -xScale.rangeBand())       //Move past the right edge of the SVG
-                        .remove();          //Deletes this element from the DOM once transition is complete
-
-
-                    //Update all labels
-                    //
-                    //Exercise: Modify this code to add a new label each time a new bar is added!
+                        .attr("x", -xScale.rangeBand())
+                        .remove();
 
                     //Select: Labels
                     var labels = svg.selectAll("text")
                         .data(dataset, key)
 
-                    /* //Enter.. Labels
+                    //Enter.. Labels
                     labels.enter()
                         .append("text")
                         .attr("text-anchor", "middle")
                         .attr("x", w)
                         .attr("y", function(d) {
-                            return h - yScale(d) + 14;
+                            return h - yScale(d.value) + 14;
                         })
                         .text(function(d) {
-                            return d;
+                            return d.value;
                         })
                         .attr("font-family", "sans-serif")
                         .attr("font-size", "11px")
-                        .attr("fill", "white");  */
+                        .attr("fill", "white");  
 
                     //Update.. Labels
                     labels.transition()
