@@ -5,7 +5,10 @@
 		<title>D3: Ch 10</title>
         <script type="text/javascript" src="http://d3js.org/d3.v3.min.js"></script>
 		<style type="text/css">
-			/* No style rules here yet */	
+			/* No style rules here yet */
+			svg text {
+						pointer-events: none;
+			};
 		</style>
 	</head>
 	<body>
@@ -78,7 +81,7 @@
 			   })
 			   .attr("font-family", "sans-serif")
 			   .attr("font-size", "11px")
-			   .attr("fill", "white");
+			   .attr("fill", "white")
 			
 		</script>
 	</body>
