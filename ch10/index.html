@@ -6,9 +6,6 @@
         <script type="text/javascript" src="http://d3js.org/d3.v3.min.js"></script>
 		<style type="text/css">
 			/* No style rules here yet */
-			svg text {
-						pointer-events: none;
-			};
 		</style>
 	</head>
 	<body>
@@ -65,6 +62,7 @@
 			   })
 			   .on("click", function() {
 			   			sortBars();
+			   			sortLabels();
 			   });
 
 			//Create labels
@@ -86,8 +84,9 @@
 			   .attr("font-size", "11px")
 			   .attr("fill", "white")
 			   .on("click", function() {
+			   			sortBars();
 			   			sortLabels();
-			   })
+			   });
 			
 			//Define sort functions
 			var sortBars = function() {
@@ -105,15 +104,15 @@
 
 			var sortLabels = function() {
 
-					svg.selectAll("rect")
+					svg.selectAll("text")
 						.sort(function(a, b) {
 							return d3.ascending(a, b);
 						})
 						.transition()
 						.duration(1000)
-						.attr("x", function(d, i) {
-							return xScale(i);
-						});
+             .attr("x", function(d, i) {
+                  return xScale(i) + xScale.rangeBand() / 2;
+             })
 			};
 
 		</script>
