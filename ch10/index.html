@@ -82,12 +82,24 @@
 			   			sortLabels();
 			   });
 			
+			//Define sort order flag
+			var sortOrderBars = false;
+			var sortOrderLabels = false;
+
+
 			//Define sort functions
 			var sortBars = function() {
 
+					//Flip value of sortOrder
+						sortOrderBars = !sortOrderBars;
+
 					svg.selectAll("rect")
 						.sort(function(a, b) {
-							return d3.ascending(a, b);
+							if (sortOrderBars) {
+								return d3.ascending(a, b);
+							} else {
+								return d3.descending(a, b);
+							}
 						})
 						.transition()
 						.duration(1000)
@@ -98,9 +110,16 @@
 
 			var sortLabels = function() {
 
+					//Flip value of sortOrder
+						sortOrderLabels = !sortOrderLabels;
+
 					svg.selectAll("text")
 						.sort(function(a, b) {
-							return d3.ascending(a, b);
+							if (sortOrderLabels) {
+								return d3.ascending(a, b);
+							} else {
+								return d3.descending(a, b);
+							}
 						})
 						.transition()
 						.duration(1000)
