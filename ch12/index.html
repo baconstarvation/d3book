@@ -2,7 +2,7 @@
 <html lang="en">
 	<head>
 		<meta charset="utf-8">
-		<title>D3: Ch 10</title>
+		<title>D3: Ch 12</title>
         <script type="text/javascript" src="http://d3js.org/d3.v3.min.js"></script>
 		<style type="text/css">
 			/* No style rules here yet */	
@@ -15,8 +15,13 @@
 			var w = 500;
 			var h = 300;
 
-			//Define default path generator
-			var path = d3.geo.path();
+			//Define map projection
+			var projection = d3.geo.albersUsa()
+								   .translate([w/2, h/2]);
+
+			//Define path generator
+			var path = d3.geo.path()
+							 .projection(projection);
 
 			//Create SVG element
 			var svg = d3.select("body")
@@ -27,14 +32,14 @@
 			//Load in GeoJSON data
 			d3.json("us-states.json", function(json) {
 
-				//Bind data and create on path per GeoJSON feature
+				//Bind data and create one path per GeoJSON feature
 				svg.selectAll("path")
 					.data(json.features)
 					.enter()
 					.append("path")
 					.attr("d", path);
 			});
-			
+
 		</script>
 	</body>
 </html>
